@@ -10,10 +10,12 @@ An online marketplace wants to know four things:
 - whether an ad campaign lifted conversions.
 
 This project answers those questions with a single offline HTML dashboard built on a tested dbt + DuckDB
-pipeline. For any selected months, the dashboard recomputes each KPI in the browser and shows its numerator and
-denominator. When the source data cannot support a figure, it is marked unavailable. It is an independent case
-study on two public datasets, a Brazilian e-commerce marketplace and a randomised online-advertising experiment,
-which are analysed separately and never joined.
+pipeline. Marketplace metrics are recomputed in the browser for the selected months wherever the data supports
+it, each shown with its numerator and denominator. Figures the data cannot support are marked unavailable. The
+lead-scoring and experiment views have their own scope: a held-out lead cohort and the experiment's two arms.
+It is an independent case study made of two separate studies on public data: one of a Brazilian e-commerce
+marketplace (orders and seller leads) and one of a randomised online-advertising experiment. The two are
+never joined.
 
 **[Open the dashboard](dashboard/decision-dashboard.html)** (download and open in any browser) ·
 **[Overview with screenshots](docs/HR_OVERVIEW.md)** · **[3-minute demo](docs/demo-3min.md)**
@@ -24,8 +26,8 @@ which are analysed separately and never joined.
 
 - **Eight views:** Overview, Categories, States, Payments, Lead scoring, Experiment, Definitions & sources,
   and Decision memo.
-- **Filters:** a month range with presets. The category, state and payment filters apply only to their own
-  view, because no extract has a joint month × state × category grain.
+- **Filters:** a month range with presets applies to the four marketplace views. The category, state and
+  payment filters apply only to their own view, because no extract has a joint month × state × category grain.
 - **Traceable numbers:** each KPI shows how it is calculated, and each chart can switch to a table.
 - **Two data sources:** it switches between historical extracts from public data and a generated sample.
 - **Break-even calculator** for the ad campaign, using cost and value figures you enter.
@@ -34,7 +36,7 @@ which are analysed separately and never joined.
 
 | View | Question | How the number is built |
 |---|---|---|
-| Overview | How did the marketplace perform in the selected months? | Rates sum numerators and denominators across months before dividing |
+| Overview | How did the marketplace perform in the selected months? | Rates are computed from numerators and denominators summed across months, not by averaging monthly rates |
 | Categories | Where is item GMV concentrated, and how large is freight's share? | Item grain; an order spanning two categories counts in both, so category order counts are not added up |
 | States | How do customer states compare on GMV, freight and delivery? | Average order value only where its denominator can be recovered uniquely; multi-month state late rates unavailable in the historical extract |
 | Payments | Which primary payment method do orders use, and how common are instalments? | "Payments on these orders" is the whole order total, not the amount paid by that method |
