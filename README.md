@@ -1,53 +1,56 @@
-# E-commerce Decision Analytics — independent case study
+# E-commerce Decision Analytics
 
 [![CI](https://github.com/herui03/ecommerce-decision-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/herui03/ecommerce-decision-analytics/actions/workflows/ci.yml)
 
-An independent e-commerce case study on public data: an offline decision dashboard, a reproducible
-dbt + DuckDB pipeline, and two separate studies, one on a Brazilian online marketplace (orders, deliveries,
-reviews, payments, seller leads) and one on a randomised online-advertising experiment. The two are never
-joined. Every number on the dashboard shows where it came from, what it is divided by, and when the
-inputs cannot support it.
+An online marketplace wants to know four things:
 
-**Recruiters and hiring managers: start with the [60-second overview](docs/HR_OVERVIEW.md)** (business problem,
-outputs, skills, a 3-minute demo, screenshots, validation and limits).
+- where deliveries run late;
+- where freight eats into order value;
+- whether a lead score helps sales prioritise;
+- whether an ad campaign lifted conversions.
 
-![Overview of the decision dashboard](docs/screenshots/overview.png)
+This project answers those questions with a single offline HTML dashboard built on a tested dbt + DuckDB
+pipeline. Marketplace metrics are recomputed in the browser for the selected months wherever the data supports
+it, each shown with its numerator and denominator. Figures the data cannot support are marked unavailable. The
+lead-scoring and experiment views have their own scope: a held-out lead cohort and the experiment's two arms.
+It is an independent case study made of two separate studies on public data: one of a Brazilian e-commerce
+marketplace (orders and seller leads) and one of a randomised online-advertising experiment. The two are
+never joined.
 
-**Open it:** download [`dashboard/decision-dashboard.html`](dashboard/decision-dashboard.html) and open it in
-any browser. It is one self-contained file (about 0.9 MB) with no server, no network access (enforced by its
-Content-Security-Policy) and no tracking.
+**[Open the dashboard](dashboard/decision-dashboard.html)** (download and open in any browser) ·
+**[Overview with screenshots](docs/HR_OVERVIEW.md)** · **[3-minute demo](docs/demo-3min.md)**
 
-## What is real, what is recomputed, what is synthetic
+![Dashboard overview: KPI tiles with numerator ÷ denominator under each value](docs/screenshots/overview.png)
 
-| | Status in this repository |
-|---|---|
-| **Marketplace views on the "Historical extracts" source** | Four metric-layer extracts committed by the prior full-data run (2026-07-16). **Not re-executed**: the raw Kaggle files could not be downloaded from the build environment. Every total, rate and ratio is **recomputed** from them with integer cents and integer counts. |
-| **Lead-scoring results** | The prior run's committed held-out scores. AUC, PR-AUC and Brier **recompute exactly**; the top-decile hit counts turned out to be tie-dependent and the training labels were not complete at the cut, so the result is shown as a **retrospective backtest**. |
-| **Ad experiment** | ITT, CACE and MDE **recomputed** from the arm counts documented by the prior run; one count is inferred as the only integer consistent with a documented rate. The 13.98 M-row file was not re-read. |
-| **"Synthetic sample" source** | A deterministic generated dataset (fictional regions `XA`–`XH`, categories `synthetic_cat_*`) that runs through the **real dbt project** from a clean clone with no credentials. It demonstrates the mechanics; it says nothing about the real marketplace or ad experiment. |
-| **Full-data re-run of the restored pipeline** | **Not performed.** The five intermediate dbt models were never committed in the original repo; they are reconstructed from the documented contract and validated on synthetic data only. |
+## What the dashboard does
 
-The historical claims from the earlier README (28 dbt models; "170 tests", which were in fact 170 passing dbt nodes
-including the 28 models; 99,441 orders; 13,979,592 ad-experiment rows)
-are the prior run's figures. They are kept in [`docs/data-verification.md`](docs/data-verification.md) as history and
-were not re-verified here. Current, re-executed evidence is in [`docs/evidence.md`](docs/evidence.md).
+- **Eight views:** Overview, Categories, States, Payments, Lead scoring, Experiment, Definitions & sources,
+  and Decision memo.
+- **Filters:** a month range with presets applies to the four marketplace views. The category, state and
+  payment filters apply only to their own view, because no extract has a joint month × state × category grain.
+- **Traceable numbers:** each KPI shows how it is calculated, and each chart can switch to a table.
+- **Two data sources:** it switches between historical extracts from public data and a generated sample.
+- **Break-even calculator** for the ad campaign, using cost and value figures you enter.
+- **Runs anywhere:** one file of about 0.9 MB, with no server. Its Content-Security-Policy blocks all network
+  requests. It supports keyboard navigation, light and dark themes, and phone-width screens.
 
-## The questions the dashboard answers
-
-| View | Business question | What makes it trustworthy |
+| View | Question | How the number is built |
 |---|---|---|
-| Overview | How did the marketplace perform in the selected months, and which operational signals deserve investigation? | Late rate = late ÷ delivered, summed before dividing (6.79%, not the 5.89% mean of monthly rates); averages that cannot be combined are shown as unavailable |
-| Categories | Where is item GMV concentrated, and how large is freight's share of it? | Item grain; an order in two categories counts in both, so category order counts are never summed into a total |
-| States | How do customer states compare on GMV, freight burden and delivery? | AOV denominators inferred only when unique; state late rate across months unavailable in the historical extract |
-| Payments | Which primary instrument do orders use, and how common are installments? | "Payments on these orders" is the whole order total, not the amount paid with that instrument |
-| Lead scoring | Can a score help sales prioritise, and what can honestly be claimed? | Label-maturity audit, look-ahead feature flagged, tie-aware top-k; ranking is not incremental wins |
-| Experiment | Did the campaign lift conversions, and what would it need to be worth? | ITT with CI; CACE with its assumptions; significance ≠ importance; hypothetical break-even calculator |
-| Definitions & sources | What does each number mean and where does it come from? | Metric dictionary, licences, inference audit, per-month reconciliation, input hashes |
-| Decision memo | What should we do next? | Investigations and experiments, not promised gains ([`docs/decision-memo.md`](docs/decision-memo.md)) |
+| Overview | How did the marketplace perform in the selected months? | Rates are computed from numerators and denominators summed across months, not by averaging monthly rates |
+| Categories | Where is item GMV concentrated, and how large is freight's share? | Item grain; an order spanning two categories counts in both, so category order counts are not added up |
+| States | How do customer states compare on GMV, freight and delivery? | Average order value only where its denominator can be recovered uniquely; multi-month state late rates unavailable in the historical extract |
+| Payments | Which primary payment method do orders use, and how common are instalments? | "Payments on these orders" is the whole order total, not the amount paid by that method |
+| Lead scoring | Can a score help sales prioritise? | Label-maturity and look-ahead checks; top-k hit counts that account for tied scores |
+| Experiment | Did the campaign lift conversions, and what would it need to be worth? | Intention-to-treat effect with a 95% confidence interval, plus a break-even calculator |
+| Definitions & sources | What does each number mean and where does it come from? | Metric dictionary, licences, per-month reconciliation, input hashes |
+| Decision memo | What should happen next? | Investigations and experiments to run ([`docs/decision-memo.md`](docs/decision-memo.md)) |
 
-Filters are scoped to the grain that supports them: the month range applies to all four marketplace views, while the
-category, state and payment filters apply only to their own view, because no extract has a joint
-month × state × category grain.
+## Example: late-delivery rate
+
+For January 2017 to August 2018, 6,532 of 96,211 delivered orders arrived late: **6.79%**. Averaging the
+20 monthly rates instead gives 5.89%, because it weights January 2017 (750 delivered orders) the same as
+November 2017 (7,289). The dashboard always sums late and delivered orders across the selected months before
+dividing.
 
 | Lead scoring | Experiment | Phone width |
 |---|---|---|
@@ -55,9 +58,10 @@ month × state × category grain.
 
 ## Run it yourself
 
-Tested on **Python 3.11 and 3.12** (Linux) with the pinned `requirements.txt`. Newer interpreters (3.13, 3.14)
-are refused with a clear message, because numpy 2.0.2 and scikit-learn 1.6.1 have no wheels for them. On macOS:
-`brew install python@3.12` (or `uv python install 3.12`). Viewing the dashboard needs no Python at all.
+Viewing the dashboard needs no installation. To rebuild it, use **Python 3.11 or 3.12** (tested on Linux)
+with the pinned `requirements.txt`. Python 3.13 and 3.14 are refused with a clear message, because numpy 2.0.2
+and scikit-learn 1.6.1 have no wheels for them. On macOS, install one with `brew install python@3.12` or
+`uv python install 3.12`.
 
 ```bash
 git clone https://github.com/herui03/ecommerce-decision-analytics.git
@@ -71,13 +75,17 @@ make test                 # adds the dbt mutation tests and a full pipeline repr
 make browser              # drives the dashboard in Chromium; writes docs/evidence/browser/
 ```
 
-`make sample` needs no Kaggle account, no API key and no network. It regenerates `sample/` and the dashboard;
-`git status` stays clean because the outputs are deterministic.
+`make sample` needs no Kaggle account, no API key and no network. It regenerates `sample/` and the
+dashboard, and `git status` stays clean because the outputs are deterministic.
 
-**Full-data path (optional, not run here).** Download the three Kaggle datasets into `data/raw/` (see the
-source manifest), then `cd dbt && DBT_PROFILES_DIR=$PWD ../.venv/bin/dbt build` (the `dev` target) and
-`python/criteo/ab_analysis.py`. The singular tests tagged `full_data` pin the prior run's counts and will show
-whether the reconstructed intermediate layer reproduces them.
+**Full-data path (optional, not run here).**
+
+1. Download the three Kaggle datasets into `data/raw/` (see the source manifest).
+2. Build the `dev` target: `cd dbt && DBT_PROFILES_DIR=$PWD ../.venv/bin/dbt build`.
+3. Run `python/criteo/ab_analysis.py`.
+
+The singular tests tagged `full_data` pin the earlier run's counts. They will show whether the reconstructed
+intermediate layer reproduces them.
 
 ## How it is built
 
@@ -95,55 +103,87 @@ Kaggle CSVs (not committed)      synthetic generator (seeded)
    dashboard/decision-dashboard.html  (engine.js recomputes every selection in the browser)
 ```
 
-Stack: SQL, dbt-core 1.10, DuckDB 1.4, Python (pandas, scikit-learn, statsmodels), vanilla JS/SVG, Playwright.
+Stack: SQL, dbt-core 1.10, DuckDB 1.4, Python (pandas, scikit-learn, statsmodels), vanilla JavaScript/SVG,
+Playwright, GitHub Actions.
 
-## What was hard, and what was decided
+## Analysis decisions
 
-| Plan | What the data said | Decision |
+| Plan | What the data showed | Decision |
 |---|---|---|
-| RFM segmentation | 96.88% of customers ordered once (historical), so Frequency is constant | Dropped F and the cohort module ([01](docs/challenge-01-rfm-frequency-collapse.md)) |
-| Ad lift on exposed users | Naive exposed vs control reports +2,675.83% against an ITT of +59.45% | ITT for decisions; exposure only as an instrument ([02](docs/challenge-02-exposure-trap.md)) |
-| One join across order children | Payments inflate 26% and 1,525 orders vanish (historical measurement) | Pre-aggregate to order grain; assert rows and money ([03](docs/challenge-03-silent-fanout.md)) |
-| Chart the full date range | A pilot period and an export tail fake growth and collapse | Explicit 2017-01 to 2018-08 window ([04](docs/challenge-04-phantom-trend.md)) |
-| Lead scoring on all leads | Zero 90-day conversions for Jul–Oct 2017 cohorts; cause unknown | Restricted window; labels, features and ties re-examined in 2026-09 ([05](docs/challenge-05-target-measured-the-org.md)) |
-| Combine monthly averages | Extracts store per-month means, not their valid counts | Exact combination only with sum + count; otherwise "unavailable" |
+| RFM segmentation | 96.88% of customers ordered once (historical), so frequency is constant | Dropped the frequency axis and the cohort module ([01](docs/challenge-01-rfm-frequency-collapse.md)) |
+| Ad lift on exposed users | Naive exposed vs control reports +2,675.83% against an ITT relative lift of +59.45% | Intention-to-treat for decisions; exposure used only as an instrument ([02](docs/challenge-02-exposure-trap.md)) |
+| One join across order children | Payments inflate 26% and 1,525 orders vanish (historical measurement) | Pre-aggregate to order grain; assert row counts and money ([03](docs/challenge-03-silent-fanout.md)) |
+| Chart the full date range | A pilot period and an export tail create false growth and collapse | Explicit window, January 2017 to August 2018 ([04](docs/challenge-04-phantom-trend.md)) |
+| Lead scoring on all leads | Zero 90-day conversions for the Jul–Oct 2017 cohorts; cause unknown | Restricted window; labels, features and ties re-examined ([05](docs/challenge-05-target-measured-the-org.md)) |
+| Combine monthly averages | Extracts store per-month means, not the counts behind them | Exact combination only when a sum and count exist; otherwise "unavailable" |
 
 ## Documents
 
-| Document | For |
+| Document | Contents |
 |---|---|
-| [`docs/HR_OVERVIEW.md`](docs/HR_OVERVIEW.md) | A 60-second overview for recruiters and hiring managers |
-| [`docs/decision-memo.md`](docs/decision-memo.md) | The recommendation, with every number generated from the inputs |
-| [`docs/metric-dictionary.md`](docs/metric-dictionary.md) | Metric and grain contract: numerators, denominators, how selections combine |
-| [`docs/source-manifest.md`](docs/source-manifest.md) | Data sources, licences, what is in the repo |
-| [`docs/evidence.md`](docs/evidence.md) | What was executed here, with results; what is historical; what could not run |
-| [`docs/defect-log.md`](docs/defect-log.md) | Defects found during this upgrade, with before/after evidence |
-| [`docs/demo-3min.md`](docs/demo-3min.md) | A three-minute walkthrough script |
+| [`docs/HR_OVERVIEW.md`](docs/HR_OVERVIEW.md) | Short overview with results, skills, screenshots and a 3-minute demo |
+| [`docs/decision-memo.md`](docs/decision-memo.md) | Recommendations, with every number generated from the inputs |
+| [`docs/metric-dictionary.md`](docs/metric-dictionary.md) | Numerators, denominators and grain for every metric, and how selections combine |
+| [`docs/source-manifest.md`](docs/source-manifest.md) | Data sources, licences, and what is in the repository |
+| [`docs/evidence.md`](docs/evidence.md) | What was executed, with logs; what is historical; what could not run |
+| [`docs/defect-log.md`](docs/defect-log.md) | Defects found and fixed, with before/after evidence |
+| [`docs/demo-3min.md`](docs/demo-3min.md) | Three-minute walkthrough script |
 | [`docs/learning-guide-zh.md`](docs/learning-guide-zh.md) | 学习指南（中文）：七个核心概念、亲手复现练习、术语表 |
-| [`docs/data-verification.md`](docs/data-verification.md) | The prior run's verification log (historical) |
+| [`docs/data-verification.md`](docs/data-verification.md) | Verification log of the earlier full-data run (historical) |
 
-## Limitations
+## Data, scope and limits
 
-- No full-data run in this repository; the reconstructed intermediate layer is unverified against the real data.
-- The marketplace data has no treatment, cost or margin fields: no causal, A/B or ROI claims are made about it.
-- The ad-experiment features are anonymised (`f0`–`f11`) and are never given product or geography meaning.
-- The historical state extract lacks delivered/late counts and valid-value counts, so several multi-month
-  state and average metrics are unavailable rather than approximated.
-- The corrected lead-scoring design trains on about one month of mature labels at the real dates; it has
-  been run only on synthetic data.
-- The lead-scoring outcome-observation cutoff (wins completely recorded through 2018-08-29) is an assumption.
+**What data is in the repository**
 
-## Credits and licence
+| Source | Kind | Status |
+|---|---|---|
+| Four marketplace metric extracts (month, month × category, month × state, month × payment type) | Aggregates of public data | Committed by an earlier full-data run (2026-07-16) on the Olist datasets. Every total, rate and ratio is recomputed from them here with integer cents and counts; the run itself was not re-executed. |
+| 2,655 held-out marketplace leads with model scores | Row-level public data (the dataset's anonymised lead IDs) | From the same earlier run. AUC, PR-AUC and Brier recompute exactly. Shown as a retrospective backtest: the training labels were not complete at the original cut, one feature used later leads (look-ahead), and the top-decile hit count depends on tied scores. |
+| Ad-experiment arm counts | Six aggregate counts from the Criteo dataset | Documented by the earlier run. One is inferred as the only integer consistent with a documented rate. The 13.98 M-row file was not re-read. |
+| Synthetic sample | Generated (regions `XA`–`XH`, categories `synthetic_cat_*`) | Deterministic. It runs through the real dbt project from a clean clone and describes no real business. |
 
-Herui directed the portfolio task. This upgrade retains historical artifacts from the existing repository; their
-original personal authorship is not independently verified here. Claude implemented and tested this upgrade
-(pipeline restoration, synthetic sample, dashboard, tests and documents); Codex independently reviewed key source,
-evidence and displayed screenshots, and several of its findings are recorded in the defect log. The commands that
-reproduce each figure are in [`docs/evidence.md`](docs/evidence.md).
+**Provenance limits**
 
-Code: MIT ([`LICENSE`](LICENSE)). Data sources: the Brazilian E-Commerce Public Dataset by Olist and the Marketing
-Funnel by Olist (CC BY-NC-SA 4.0); the Criteo Uplift Modeling Dataset (Criteo AI Lab; six aggregate counts only).
-Olist-derived data in this repository (extracts, lead scores, dashboard payload) is shared under CC BY-NC-SA 4.0,
-attribution Olist, non-commercial. See [`docs/source-manifest.md`](docs/source-manifest.md).
+- The raw public files could not be downloaded in the build environment. The historical extracts and lead
+  scores have therefore not been compared row by row with the source datasets.
+- Five intermediate dbt models missing from the original project were reconstructed. They have been
+  validated on the synthetic sample only; there has been no full-data re-run.
+- Figures from the earlier run that are not recomputed here are kept as history in
+  [`docs/data-verification.md`](docs/data-verification.md). They include 99,441 source orders,
+  13,979,592 experiment rows, and 170 passing dbt nodes, a count that includes the 28 models.
+
+**Analysis limits**
+
+- The marketplace data has no treatment, cost or margin fields, so no causal, A/B or ROI claims are made
+  about it.
+- The ad-experiment features are anonymised (`f0`–`f11`) and are not given product or geography meaning.
+- The historical state extract lacks delivered and late counts, and the counts behind its averages. Several
+  multi-month state and average metrics are therefore shown as unavailable rather than approximated.
+- The corrected lead-scoring design trains on about one month of mature labels at the real dates, and it has
+  been run only on synthetic data. The outcome-observation cutoff (wins recorded through 2018-08-29) is an
+  assumption.
+
+**Validation**
+
+- **dbt:** the synthetic build runs 171 nodes (28 models + 143 data tests).
+- **Tests:**
+  - 108 Python tests. Among them, the dbt mutation tests catch 6 of 6 injected defects.
+  - 9 JavaScript engine tests.
+  - A Chromium end-to-end run (13 tests, 74 checks) that compares displayed numbers with a separate
+    reference implementation.
+- **Reproducibility:** rebuilds are byte-identical, and CI runs on Python 3.11 and 3.12. Logs are in
+  [`docs/evidence.md`](docs/evidence.md).
+
+## Licence and data attribution
+
+Code: MIT ([`LICENSE`](LICENSE)).
+
+Data sources:
+
+- The Brazilian E-Commerce Public Dataset by Olist and the Marketing Funnel by Olist (CC BY-NC-SA 4.0).
+- The Criteo Uplift Modeling Dataset (Criteo AI Lab); only six aggregate counts are used.
+
+Olist-derived data in this repository (extracts, lead scores, dashboard payload) is shared under
+CC BY-NC-SA 4.0, attribution Olist, non-commercial. See [`docs/source-manifest.md`](docs/source-manifest.md).
 
 Herui Dou, MSc Business Analytics, NTU. [LinkedIn](https://www.linkedin.com/in/heruidou)
