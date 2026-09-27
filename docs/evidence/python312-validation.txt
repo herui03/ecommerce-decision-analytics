@@ -1,0 +1,23 @@
+# Python 3.12 validation (2026-09-26, this build environment), code at commit 8e58ac8
+# The commit was exported with git archive into an empty directory, run with a Python 3.12.3
+# venv holding the pinned requirements.txt + requirements-dev.txt (binary wheels only), then:
+#   PYTHONPATH=python .venv/bin/python -m portfolio.pipeline sample
+#   .venv/bin/python -m pytest -m "not browser"
+# and every output was compared byte-for-byte with the Python 3.11.15 outputs of the same commit.
+
+interpreter: Python 3.12.3
+identical to 3.11: sample/extracts/mart_category_performance.csv
+identical to 3.11: sample/extracts/mart_monthly_performance.csv
+identical to 3.11: sample/extracts/mart_payment_performance.csv
+identical to 3.11: sample/extracts/mart_state_performance.csv
+identical to 3.11: sample/experiment/criteo_synthetic.json
+identical to 3.11: sample/dbt_nodes.json
+identical to 3.11: sample/lead_scoring/designs.json
+identical to 3.11: sample/lead_scoring/scores_corrected_design.csv
+identical to 3.11: dashboard/decision-dashboard.html
+identical to 3.11: dashboard/dashboard-data.json
+identical to 3.11: docs/decision-memo.md
+pytest (not browser): 108 passed, 13 deselected, 2 warnings in 99.11s (0:01:39)
+# CI also runs Python 3.12 (3.12.14 on GitHub's runner); see the pull request checks.
+# Python 3.13 / 3.14: not supported (numpy 2.0.2 has no wheels); the pipeline exits with
+# code 2 and a message pointing to the no-install HTML (checked with /usr/bin/python3.13).

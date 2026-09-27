@@ -1,0 +1,152 @@
+version: 2
+
+models:
+  # ==========================================================================
+  # Every model below declares its TRUE grain, established empirically by
+  # python/probe_grain.py on 2026-07-16 - not assumed from the column names.
+  # Three of these tables have a key that LOOKS like a primary key and isn't.
+  # ==========================================================================
+
+  - name: stg_olist__orders
+    description: "One row per order. 99,441."
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: "Per-order key. Unique here - do NOT mistake for a person."
+        data_tests: [unique, not_null]
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [delivered, shipped, canceled, unavailable, invoiced, processing, created, approved]
+
+  - name: stg_olist__order_items
+    description: "One row per item within an order. 112,650 across 98,666 orders."
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [order_id, order_item_seq]
+    columns:
+      - name: order_id
+        description: "NOT unique. 13,984 duplicates. Aggregate before joining to orders."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__orders')
+                field: order_id
+      - name: item_price_brl
+        data_tests: [not_null]
+
+  - name: stg_olist__order_payments
+    description: "One row per payment instrument on an order. 103,886 across 99,440 orders."
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [order_id, payment_seq]
+    columns:
+      - name: order_id
+        description: "NOT unique. 4,446 duplicates (split payments / instalments)."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__orders')
+                field: order_id
+      - name: payment_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [credit_card, boleto, voucher, debit_card, not_defined]
+
+  - name: stg_olist__order_reviews
+    description: >
+      One row per (review_id, order_id). 99,224. review_id is NOT a key - 814 duplicates.
+      This is the trap in this source: the column named like an ID is not one.
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [review_id, order_id]
+    columns:
+      - name: review_id
+        description: "Attribute, NOT a key. 814 duplicates - deliberately NOT tested unique."
+        data_tests: [not_null]
+      - name: order_id
+        description: "NOT unique - 551 duplicates."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__orders')
+                field: order_id
+      - name: review_score
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+
+  - name: stg_olist__customers
+    description: "One row per customer_id (99,441) = one per order. 96,096 real people."
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: customer_unique_id
+        description: >
+          Person key. NOT unique (3,345 dupe rows) - that duplication is the entire
+          repeat-purchase population and must not be 'fixed'.
+        data_tests: [not_null]
+      - name: customer_state
+        data_tests: [not_null]
+
+  - name: stg_olist__products
+    description: "One row per product. 32,951."
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+
+  - name: stg_olist__sellers
+    description: "One row per seller. 3,095."
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]
+
+  - name: stg_olist__product_categories
+    description: "PT→EN lookup. 71."
+    columns:
+      - name: product_category_pt
+        data_tests: [unique, not_null]
+      - name: product_category_en
+        data_tests: [not_null]
+
+  - name: stg_olist__geolocation
+    description: >
+      Raw grain, no unique key by design. 1,000,163 rows / 19,015 zips.
+      Never join directly - see int_geolocation__zip_centroid.
+    columns:
+      - name: zip_prefix
+        data_tests: [not_null]
+
+  - name: stg_olist__marketing_qualified_leads
+    description: "One row per lead. 8,000."
+    columns:
+      - name: mql_id
+        data_tests: [unique, not_null]
+      - name: first_contact_date
+        data_tests: [not_null]
+
+  - name: stg_olist__closed_deals
+    description: "One row per won lead. 842. Positive class for lead scoring (10.53%)."
+    columns:
+      - name: mql_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_olist__marketing_qualified_leads')
+                field: mql_id
+      - name: seller_id
+        description: "Unique (842). Only 380 join to a transacting seller - unexplained."
+        data_tests: [unique, not_null]

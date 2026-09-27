@@ -1,0 +1,48 @@
+# R4 regressions (incl. 3 payment-scope follow-ups) run against the PRE-FIX contract.py
+# pre-fix sha256: 7e2e99fc4e38115cbbd2b44630303531de06b46572db2f9473ccae9f58b371d5 (frozen copy, not committed)
+# command: PYTHONPATH=<frozen pre-fix copy> python -m pytest tests/test_contract_regressions.py -p no:cacheprovider -o pythonpath= -q -rA --tb=line
+
+FF...F.FFFFFF.....FFF.FF.                                                [100%]
+=================================== FAILURES ===================================
+<scratch>/prefix_R4/portfolio/contract.py:411: portfolio.contract.ExtractError: cross-extract reconciliation failed: [{'check': 'category distinct-orders summed < order lines', 'ok': False, 'detail': '2 < 2'}]
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:84: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:112: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:119: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:119: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:119: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:119: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+<scratch>/prefix_R4/portfolio/contract.py:76: ValueError: cannot convert signaling NaN to float
+<scratch>/prefix_R4/portfolio/contract.py:69: OverflowError: cannot convert Infinity to integer
+<scratch>/prefix_R4/portfolio/contract.py:291: TypeError: '>' not supported between instances of 'NoneType' and 'int'
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:149: Failed: DID NOT RAISE <class 'portfolio.contract.ExtractError'>
+/home/user/ecommerce-campaign-analytics/tests/test_contract_regressions.py:160: AssertionError: Regex pattern did not match.
+<scratch>/prefix_R4/portfolio/contract.py:411: portfolio.contract.ExtractError: cross-extract reconciliation failed: [{'check': 'payment GMV == monthly GMV (cents)', 'ok': False, 'detail': '3000 vs 4000'}, {'check': 'category distinct-orders summed < order lines', 'ok': False, 'detail': '3 < 3'}]
+<scratch>/prefix_R4/portfolio/contract.py:411: portfolio.contract.ExtractError: cross-extract reconciliation failed: [{'check': 'payment GMV == monthly GMV (cents)', 'ok': False, 'detail': '3000 vs 4000'}, {'check': 'category distinct-orders summed < order lines', 'ok': False, 'detail': '3 < 3'}]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_contract_regressions.py::test_r4_04_swapped_state_months_are_rejected
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-1-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-13-2017-13-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[17-01-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[NaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[1.5]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[-3]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[abc]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_cents_rejects_nonfinite
+PASSED tests/test_contract_regressions.py::test_optional_true_nulls_remain_valid
+PASSED tests/test_contract_regressions.py::test_payment_gmv_above_month_is_rejected
+FAILED tests/test_contract_regressions.py::test_r4_03_single_line_orders_are_valid
+FAILED tests/test_contract_regressions.py::test_r4_04_swapped_category_months_are_rejected
+FAILED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-01-2017-02-01]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[NaN]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[nan]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[Infinity]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[-inf]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[sNaN]
+FAILED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[Infinity]
+FAILED tests/test_contract_regressions.py::test_r4_05_missing_required_count_is_a_contextual_error
+FAILED tests/test_contract_regressions.py::test_r4_05_nonfinite_mean_is_rejected
+FAILED tests/test_contract_regressions.py::test_r4_05_duplicate_header_is_rejected
+FAILED tests/test_contract_regressions.py::test_unpaid_item_order_reconciles_exactly_with_components
+FAILED tests/test_contract_regressions.py::test_unpaid_item_order_is_bounded_not_rejected_without_components
+14 failed, 11 passed in 0.33s

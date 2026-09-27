@@ -1,0 +1,52 @@
+name: 'olist_campaign_analytics'
+version: '1.0.0'
+config-version: 2
+profile: 'olist'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  olist_campaign_analytics:
+    staging:
+      # Materialized as TABLE, not the conventional view.
+      # Sources are static CSVs read via external_location with a path relative to
+      # the dbt working directory. As views, that relative path is baked into the
+      # view definition, so the .duckdb file only works when queried from dbt/ and
+      # breaks for Tableau, notebooks, or anyone who clones the repo. Tables make
+      # the warehouse self-contained and portable; the source is static, so the
+      # freshness argument for views does not apply here.
+      +materialized: table
+      +schema: staging
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+# ---------------------------------------------------------------------------
+# Analysis window. Verified 2026-07-16 against the real monthly distribution.
+#
+# The raw data spans 2016-09-04 -> 2018-10-17, but the ends are artifacts:
+#   2016-09: 4 orders   2016-10: 324   2016-11: ZERO (month absent entirely)
+#   2016-12: 1 order    -> a pilot period, not a business
+#   2018-08-29 onwards the daily count collapses 44 -> 14 -> 4 -> 1 and never
+#   recovers; 2018-09 has 16 orders and 2018-10 has 4. That is where the export
+#   was cut, not where the business stopped.
+#
+# Charting the raw range tells a false story: growth from 4 to 7,544 orders and
+# then a collapse to 4. Both ends are the dataset, not the market.
+#
+# Window 2017-01 -> 2018-08 keeps 99,092 of 99,441 orders (99.65%), spans 20
+# consecutive months with no gaps, and its thinnest month is 2017-01 at 800
+# orders. Excluded: 329 pilot + 20 tail = 349 orders (0.35%).
+#
+# The FACT keeps every order and only carries a flag. Filtering is the metric
+# layer's job -- the spine records what happened.
+# ---------------------------------------------------------------------------
+vars:
+  analysis_window_start: '2017-01-01'
+  analysis_window_end:   '2018-09-01'   # exclusive

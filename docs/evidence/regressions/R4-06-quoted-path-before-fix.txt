@@ -1,0 +1,17 @@
+# R4-06 reproduction: pipeline at checkpoint 5eafd5e run from a clone whose path contains a space and an apostrophe
+# clone path: <scratch>/Herui's portfolio
+# command: PYTHONPATH=python python -m portfolio.pipeline sample --skip-dashboard
+
+    main()
+  File "<scratch>/Herui's portfolio/python/portfolio/pipeline.py", line 231, in main
+    {"sample": cmd_sample, "dashboard": cmd_dashboard, "verify": cmd_verify}[args.cmd](args)
+  File "<scratch>/Herui's portfolio/python/portfolio/pipeline.py", line 174, in cmd_sample
+    ex = export_sample_extracts()
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<scratch>/Herui's portfolio/python/portfolio/pipeline.py", line 100, in export_sample_extracts
+    con.execute(f"COPY (SELECT * FROM main_marts.{model} ORDER BY {order}) "
+_duckdb.ParserException: Parser Error: syntax error at or near "s"
+
+LINE 1: ...tics/f2364bdb-d631-5dd4-926b-e2b7822fcb27/scratchpad/Herui's portfolio/sample/extracts/mart_monthly_performance.csv...
+                                                                      ^
+exit=1

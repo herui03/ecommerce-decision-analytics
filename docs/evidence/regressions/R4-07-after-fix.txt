@@ -1,0 +1,26 @@
+# R4-07 tests run against the FIXED modules (experiment.py 99593eb802c42063..., leads.py 7f3eaa44f8b1f067...)
+# note: the balance test fixture was corrected after the first fixed run (both exposure groups had zero variance, where SMD is correctly undefined); an undefined-SMD test was added
+# command: python -m pytest tests/test_r4_07_experiment.py -p no:cacheprovider -q -rA
+
+..................                                                       [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_r4_07_experiment.py::test_r4_07_invalid_counts_give_one_controlled_result
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts0]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts1]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts2]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts3]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts4]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts5]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_all_zero_outcomes_are_explicit_not_nan
+PASSED tests/test_r4_07_experiment.py::test_r4_07_boundary_rate_does_not_report_degenerate_interval
+PASSED tests/test_r4_07_experiment.py::test_r4_07_small_counts_carry_an_approximation_warning
+PASSED tests/test_r4_07_experiment.py::test_r4_07_generic_assumptions_carry_no_measured_numbers
+PASSED tests/test_r4_07_experiment.py::test_r4_07_synthetic_run_has_its_own_measured_balance
+PASSED tests/test_r4_07_experiment.py::test_r4_07_balance_is_undefined_without_variance
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row0]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row1]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row2]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row3]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_audit_states_window_end_and_usable_date_precisely
+18 passed in 1.18s

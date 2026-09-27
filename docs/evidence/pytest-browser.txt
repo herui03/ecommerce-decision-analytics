@@ -1,0 +1,17 @@
+.............                                                            [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/browser/test_dashboard_e2e.py::test_01_load_and_every_view_renders
+PASSED tests/browser/test_dashboard_e2e.py::test_02_overview_numbers_and_month_filter
+PASSED tests/browser/test_dashboard_e2e.py::test_03_table_alternative_and_keyboard
+PASSED tests/browser/test_dashboard_e2e.py::test_04_categories_search_and_empty
+PASSED tests/browser/test_dashboard_e2e.py::test_05_states_scope_selection_and_unavailable
+PASSED tests/browser/test_dashboard_e2e.py::test_06_payments_filter_keeps_denominator
+PASSED tests/browser/test_dashboard_e2e.py::test_07_leads_ties_and_slider
+PASSED tests/browser/test_dashboard_e2e.py::test_08_experiment_and_hypothetical_calculator
+PASSED tests/browser/test_dashboard_e2e.py::test_09_synthetic_source_exact_means
+PASSED tests/browser/test_dashboard_e2e.py::test_10_definitions_and_memo
+PASSED tests/browser/test_dashboard_e2e.py::test_11_narrow_width_and_dark_mode
+PASSED tests/browser/test_dashboard_e2e.py::test_12_readme_screenshots
+PASSED tests/browser/test_dashboard_e2e.py::test_99_every_check_passed
+13 passed, 108 deselected in 12.54s

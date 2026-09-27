@@ -1,0 +1,36 @@
+{
+  "label": "HISTORICAL - aggregate counts documented from the prior full-data run (2026-07-16); the raw Criteo file was NOT re-read in this build",
+  "source_document": "docs/data-verification.md, section 'Criteo A/B analysis' (and 'Source 2: Criteo Uplift v2.1')",
+  "dataset": "Criteo Uplift Modeling v2.1 (13,979,592 rows per the prior run)",
+  "counts": {
+    "n_t": 11882655,
+    "y_t": 36711,
+    "n_c": 2096937,
+    "y_c": 4063,
+    "n_exposed": 428212
+  },
+  "inferred": {
+    "y_exposed": {
+      "value": 23031,
+      "documented_rate_pct": "5.3784",
+      "method": "the unique integer k in [0, 428212] with 100*k/428212 within half a unit of the documented 4-decimal rate (portfolio.contract.infer_rate_numerator); checked in tests/test_experiment.py"
+    }
+  },
+  "documented_results": {
+    "itt_pp": 0.1152,
+    "itt_ci_pp": [0.1085, 0.1219],
+    "itt_relative_pct": 59.45,
+    "compliance_pct": 3.6037,
+    "cace_pp": 3.1964,
+    "complier_control_rate_pct": 2.182,
+    "complier_relative_pct": 146.49,
+    "naive_relative_pct": 2675.83,
+    "never_taker_rate_pct": 0.1194,
+    "mde80_pp": 0.0093,
+    "mde95_pp": 0.0121,
+    "z": 28.52,
+    "p_value": "7.31e-179",
+    "smd_treatment_f0": 0.0069,
+    "smd_exposure_f0": 0.8524
+  }
+}

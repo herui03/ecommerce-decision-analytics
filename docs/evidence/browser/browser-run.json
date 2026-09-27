@@ -1,0 +1,462 @@
+{
+ "meta": {
+  "url": "dashboard/decision-dashboard.html (file://)",
+  "chromium": "141.0.7390.37",
+  "playwright": "1.56.0",
+  "python": "3.11.15",
+  "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+  "html_sha256": "1c260a0ed002f79a8106f295de1b77600878831019e025d97d2914f15ed63908"
+ },
+ "summary": {
+  "checks": 74,
+  "passed": 74
+ },
+ "checks": [
+  {
+   "check": "CSP forbids network access",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/overview: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/categories: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/states: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/payments: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/leads: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/experiment: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/definitions: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "historical/memo: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/overview: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/categories: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/states: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/payments: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/leads: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/experiment: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/definitions: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic/memo: panel renders",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "full window orders shown",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "full window GMV shown (integer cents)",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "weighted late rate tile",
+   "expected": "6.79%",
+   "actual": "6.79%",
+   "pass": true
+  },
+  {
+   "check": "weighted vs naive counterexample shown",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "month filter changes the numbers",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "2018-01..03 orders equal reference",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "2018-01..03 late tile equals reference",
+   "expected": "12.89%",
+   "actual": "12.89%",
+   "pass": true
+  },
+  {
+   "check": "2018-01..03 AOV tile equals reference",
+   "expected": "BRL153.98",
+   "actual": "BRL153.98",
+   "pass": true
+  },
+  {
+   "check": "multi-month review score is UNAVAILABLE (historical)",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "single month: review score available and equal to extract",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "single month: active customers available",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "reversed range shows an error, not numbers",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "preset restores the full window",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "table toggle sets aria-pressed",
+   "expected": "true",
+   "actual": "true",
+   "pass": true
+  },
+  {
+   "check": "table alternative has one row per month",
+   "expected": 20,
+   "actual": 20,
+   "pass": true
+  },
+  {
+   "check": "toggle returns to the chart",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "keyboard: End shows the last month's tooltip",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "keyboard: ArrowRight moves to the next tab",
+   "expected": "true",
+   "actual": "true",
+   "pass": true
+  },
+  {
+   "check": "keyboard: focus follows the selected tab",
+   "expected": "tab-categories",
+   "actual": "tab-categories",
+   "pass": true
+  },
+  {
+   "check": "search keeps only matching categories",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "largest matching category and GMV equal reference",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "no-match search shows an empty state",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "category search does not leak into the States view",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "multi-month state late rate is UNAVAILABLE (no counts in extract)",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "no state selected shows an empty state",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "SP only: orders and GMV equal reference",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "single month: state late-rate chart appears",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "instrument filter leaves one row",
+   "expected": 1,
+   "actual": 1,
+   "pass": true
+  },
+  {
+   "check": "credit_card share still divides by all instruments",
+   "expected": "75.37%",
+   "actual": "75.37%",
+   "pass": true
+  },
+  {
+   "check": "payments view states what payment_brl means",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "not_defined: NULL GMV is shown as missing, not BRL 0.00",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "LR top-265 tie-aware expected hits",
+   "expected": "52.86",
+   "actual": "52.86",
+   "pass": true
+  },
+  {
+   "check": "maturity callout states usable-from dates",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "claim box says ranking is not incremental wins",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "GB top-265 tie-aware expected hits",
+   "expected": "50.38",
+   "actual": "50.38",
+   "pass": true
+  },
+  {
+   "check": "slider changes k and the hit count",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "ITT tile equals recomputation",
+   "expected": "+0.1152 pp",
+   "actual": "+0.1152 pp",
+   "pass": true
+  },
+  {
+   "check": "invalid cost input shows an error",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "hypothetical net value per 1,000 assigned",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic banner is shown",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic orders equal reference",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "synthetic multi-month review mean = sum / valid count",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "metric search filters the dictionary",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "memo numbers come from the historical inputs",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "memo frames recommendations as tests",
+   "expected": true,
+   "actual": true,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on overview",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on categories",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on states",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on payments",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on leads",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on experiment",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on definitions",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "375px: no horizontal page overflow on memo",
+   "expected": 0,
+   "actual": 0,
+   "pass": true
+  },
+  {
+   "check": "theme toggle applies dark mode",
+   "expected": "dark",
+   "actual": "dark",
+   "pass": true
+  },
+  {
+   "check": "no console errors or warnings in the whole run",
+   "expected": [],
+   "actual": [],
+   "pass": true
+  },
+  {
+   "check": "no uncaught page errors",
+   "expected": [],
+   "actual": [],
+   "pass": true
+  },
+  {
+   "check": "no network request other than the file itself",
+   "expected": [],
+   "actual": [],
+   "pass": true
+  }
+ ],
+ "console": [],
+ "requests_total": 1
+}

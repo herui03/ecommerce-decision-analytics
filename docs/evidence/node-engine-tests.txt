@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: money is formatted from integer cents without float drift
+ok 1 - money is formatted from integer cents without float drift
+  ---
+  duration_ms: 2.07594
+  type: 'test'
+  ...
+# Subtest: weighted rate differs from the mean of rates (the counterexample)
+ok 2 - weighted rate differs from the mean of rates (the counterexample)
+  ---
+  duration_ms: 0.637037
+  type: 'test'
+  ...
+# Subtest: an unidentified cell makes the aggregate unavailable instead of being dropped
+ok 3 - an unidentified cell makes the aggregate unavailable instead of being dropped
+  ---
+  duration_ms: 1.103901
+  type: 'test'
+  ...
+# Subtest: all-NULL money is NULL, not zero
+ok 4 - all-NULL money is NULL, not zero
+  ---
+  duration_ms: 0.121014
+  type: 'test'
+  ...
+# Subtest: means combine only with valid-value counts
+ok 5 - means combine only with valid-value counts
+  ---
+  duration_ms: 0.20136
+  type: 'test'
+  ...
+# Subtest: month range: reversed and unknown months are invalid
+ok 6 - month range: reversed and unknown months are invalid
+  ---
+  duration_ms: 0.161503
+  type: 'test'
+  ...
+# Subtest: top-k is tie-aware and independent of order inside a tied block
+ok 7 - top-k is tie-aware and independent of order inside a tied block
+  ---
+  duration_ms: 0.28947
+  type: 'test'
+  ...
+# Subtest: axis scale and label spacing
+ok 8 - axis scale and label spacing
+  ---
+  duration_ms: 0.660802
+  type: 'test'
+  ...
+# Subtest: break-even: invalid input is an error, arithmetic uses the ITT only
+ok 9 - break-even: invalid input is an error, arithmetic uses the ITT only
+  ---
+  duration_ms: 0.342541
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 92.780895

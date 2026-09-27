@@ -1,0 +1,6 @@
+# two full `make sample` runs, SHA-256 over every file in sample/
+run 1: c443c925d53140773ca6b762291c420474023e1a05a9bb5893cf20aac124c4e6  -
+run 2: c443c925d53140773ca6b762291c420474023e1a05a9bb5893cf20aac124c4e6  -
+result: identical
+
+# git status after the runs (empty = committed outputs reproduced exactly)

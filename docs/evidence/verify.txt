@@ -1,0 +1,5 @@
+  dashboard/decision-dashboard.html: identical to a fresh build
+  dashboard/dashboard-data.json: identical to a fresh build
+  docs/metric-dictionary.md: identical to a fresh build
+  docs/source-manifest.md: identical to a fresh build
+  docs/decision-memo.md: identical to a fresh build

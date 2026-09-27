@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- default-src 'none': the page cannot make ANY network request. Everything it shows is inlined below. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Offline decision dashboard for an independent e-commerce case study on public data: marketplace performance (historical extracts and a synthetic sample) and a randomised ad experiment. Every number shows its source, denominator and limits.">
+<title>E-commerce Decision Dashboard</title>
+<style>/*__STYLES__*/</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <div class="title-row">
+      <div class="title-block">
+        <p class="eyebrow">Portfolio analytics · one offline HTML file · no server, no network, no tracking</p>
+        <h1>E-commerce decision dashboard — independent case study</h1>
+        <p class="lede">Two <strong>separate</strong> studies on public data: a Brazilian online marketplace (orders, deliveries,
+          reviews, payments, seller leads) and a randomised online-advertising experiment. They are never joined: the marketplace
+          data has no treatment, cost or margin fields, and the experiment's features are anonymised. Dataset publishers and
+          licences are under Definitions &amp; sources.</p>
+      </div>
+      <button type="button" id="theme-toggle" class="btn ghost" aria-label="Colour theme: follow system. Activate to change.">Theme: auto</button>
+    </div>
+    <fieldset class="source-switch">
+      <legend>Data source</legend>
+      <label><input type="radio" name="source" value="historical" checked> Historical extracts <span class="muted">(prior full-data run)</span></label>
+      <label><input type="radio" name="source" value="synthetic"> Synthetic sample <span class="muted">(generated, not real)</span></label>
+    </fieldset>
+    <div id="source-banner" class="banner" role="status" aria-live="polite"></div>
+  </div>
+</header>
+
+<nav class="wrap tabs-wrap" aria-label="Dashboard views">
+  <div class="tabs" role="tablist" aria-label="Views" id="tablist">
+    <button role="tab" id="tab-overview" aria-controls="panel-overview" data-view="overview">Overview</button>
+    <button role="tab" id="tab-categories" aria-controls="panel-categories" data-view="categories">Categories</button>
+    <button role="tab" id="tab-states" aria-controls="panel-states" data-view="states">States</button>
+    <button role="tab" id="tab-payments" aria-controls="panel-payments" data-view="payments">Payments</button>
+    <button role="tab" id="tab-leads" aria-controls="panel-leads" data-view="leads">Lead scoring</button>
+    <button role="tab" id="tab-experiment" aria-controls="panel-experiment" data-view="experiment">Experiment</button>
+    <button role="tab" id="tab-definitions" aria-controls="panel-definitions" data-view="definitions">Definitions &amp; sources</button>
+    <button role="tab" id="tab-memo" aria-controls="panel-memo" data-view="memo">Decision memo</button>
+  </div>
+</nav>
+
+<main id="main" class="wrap" tabindex="-1">
+  <section id="filters" class="filters" aria-label="Filters for the current view"></section>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+
+  <section role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-categories" aria-labelledby="tab-categories" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-states" aria-labelledby="tab-states" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-payments" aria-labelledby="tab-payments" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-leads" aria-labelledby="tab-leads" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-experiment" aria-labelledby="tab-experiment" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-definitions" aria-labelledby="tab-definitions" class="panel" hidden></section>
+  <section role="tabpanel" id="panel-memo" aria-labelledby="tab-memo" class="panel" hidden></section>
+  <noscript><p class="empty">This dashboard computes every number in your browser and needs JavaScript. The inputs are in
+    <code>dashboard/dashboard-data.json</code> next to this file.</p></noscript>
+</main>
+
+<footer class="wrap foot">
+  <p><strong>Credits.</strong> Herui directed the portfolio task. This upgrade retains historical artifacts from the existing repository;
+    their original personal authorship is not independently verified here. Claude implemented and tested this upgrade; Codex independently
+    reviewed key source, evidence and displayed screenshots.</p>
+  <p><strong>Data licences.</strong> Marketplace figures derive from the Brazilian E-Commerce Public Dataset by Olist and the Marketing
+    Funnel by Olist: CC BY-NC-SA 4.0, attribution Olist, non-commercial, aggregated and recomputed here. Ad-experiment figures: six
+    aggregate counts from the Criteo Uplift Modeling Dataset (Criteo AI Lab); see Definitions &amp; sources. Synthetic figures are generated
+    and describe no real business.</p>
+</footer>
+
+<script type="application/json" id="dashboard-data">__DATA_JSON__</script>
+<script>/*__ENGINE__*/</script>
+<script>/*__APP__*/</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: tests (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pinned dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Committed dashboard and generated docs equal a fresh build
+        run: make verify
+
+      - name: Dashboard engine unit tests (Node)
+        run: node --test tests/js/engine.test.mjs
+
+      - name: Python tests (contract, leads, experiment, artifact, dbt mutations, pipeline reproduction)
+        run: .venv/bin/python -m pytest -m "not browser" -p no:cacheprovider
+
+      - name: Full synthetic pipeline from scratch reproduces the committed extracts exactly
+        run: |
+          make sample
+          git diff --exit-code -- sample/extracts sample/dbt_nodes.json sample/experiment
+
+      - name: Browser end-to-end in Chromium
+        if: matrix.python == '3.11'
+        run: |
+          git checkout -- dashboard sample docs   # test the committed page, not the rebuilt one
+          .venv/bin/python -m playwright install --with-deps chromium
+          .venv/bin/python -m pytest -m browser -p no:cacheprovider
+
+      - name: Upload browser evidence
+        if: always() && matrix.python == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-evidence
+          path: docs/evidence/browser/
+          if-no-files-found: ignore

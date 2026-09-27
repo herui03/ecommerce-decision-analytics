@@ -1,0 +1,4 @@
+# same simulation as tests/test_experiment.py::test_interval_coverage_is_close_to_nominal
+replications: 300; true ITT 0.004; true CACE 0.05
+ITT 95% Wald interval coverage: 287/300 = 0.957
+CACE 95% delta-method interval coverage: 287/300 = 0.957

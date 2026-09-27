@@ -1,0 +1,22 @@
+# Same follow-up tests run against the FIXED modules
+# contract.py 9f2dfd72ddaf018f..., pipeline.py 1b25a94a43e25251..., experiment.py 1e3b2d93b2f96c70..., paths.py 421dd3b24f379215...
+# command: python -m pytest tests/test_r4_followups.py -p no:cacheprovider -q -rA
+
+..............                                                           [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[NaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[-Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[abc]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[sNaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[NaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[not-a-number]
+PASSED tests/test_r4_followups.py::test_r4_05b_float_overflow_is_rejected
+PASSED tests/test_r4_followups.py::test_r4_05b_mean_overflow_in_extract_is_contextual
+PASSED tests/test_r4_followups.py::test_tolerance_uses_decimal_exponent_for_scientific_notation
+PASSED tests/test_r4_followups.py::test_r4_06_sql_literal_escapes_single_quotes
+PASSED tests/test_r4_followups.py::test_r4_06_counts_from_csv_in_quoted_directory
+PASSED tests/test_r4_followups.py::test_r4_06_export_extracts_to_quoted_directory
+14 passed in 0.27s

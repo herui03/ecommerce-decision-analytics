@@ -1,0 +1,183 @@
+version: 2
+
+models:
+  - name: dim_geography
+    description: "One row per zip prefix. 19,015."
+    columns:
+      - name: zip_prefix
+        data_tests: [unique, not_null]
+
+  - name: dim_products
+    description: >
+      One row per product - ALL 32,951. LEFT JOIN to the 71-row PT→EN lookup:
+      the product table has 73 distinct PT categories, so an INNER JOIN would drop
+      13 products (2 untranslated categories) plus 610 with a NULL category.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__products')
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+      - name: product_category
+        description: "EN → PT → 'unknown'. Never NULL, so grouping never loses rows."
+        data_tests: [not_null]
+
+  - name: dim_sellers
+    description: "One row per seller. 3,095."
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__sellers')
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]
+
+  - name: dim_customers
+    description: >
+      One row per PERSON (customer_unique_id). 96,096 - NOT 99,441. Address taken from
+      the most recent order (250 people hold multiple zips, 39 multiple states).
+    columns:
+      - name: customer_unique_id
+        data_tests: [unique, not_null]
+      - name: order_count
+        data_tests: [not_null]
+      - name: days_since_last_order
+        data_tests: [not_null]
+
+  - name: fct_orders
+    description: >
+      GRAIN: one order. 99,441. Use for order counts, AOV, delivery, payment mix.
+      NEVER use for category - 727 orders span multiple categories.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__orders')
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_unique_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_unique_id
+
+  - name: fct_order_items
+    description: >
+      GRAIN: one order line. 112,650. Use for category/product/seller revenue.
+      NEVER count rows as orders - order_id repeats 13,984 times.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__order_items')
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [order_id, order_item_seq]
+    columns:
+      - name: product_category
+        data_tests: [not_null]
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+
+  # === metric layer ==========================================================
+  - name: mart_monthly_performance
+    description: >
+      Headline trend. One row per month, analysis window only (2017-01 → 2018-08) = 20 rows.
+      All ratios computed here; the dashboard performs no arithmetic.
+    columns:
+      - name: purchase_month
+        data_tests: [unique, not_null]
+      - name: orders
+        data_tests: [not_null]
+      - name: gmv_brl
+        data_tests: [not_null]
+
+  - name: mart_category_performance
+    description: "One row per (month, category). Built on fct_order_items - category is only additive at item grain."
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [purchase_month, product_category]
+    columns:
+      - name: product_category
+        data_tests: [not_null]
+
+  - name: mart_state_performance
+    description: "One row per (month, customer_state)."
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [purchase_month, customer_state]
+
+  - name: mart_payment_performance
+    description: "One row per (month, primary_payment_type)."
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [purchase_month, primary_payment_type]
+
+  - name: mart_customer_segments
+    description: >
+      One row per person. 96,096. R/M segmentation - deliberately NOT RFM: Frequency is
+      constant at 1 for 96.88% of the base. See challenge-01.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('dim_customers')
+    columns:
+      - name: customer_unique_id
+        data_tests: [unique, not_null]
+      - name: r_score
+        data_tests:
+          - not_null
+          - accepted_values: {arguments: {values: [1,2,3,4,5], quote: false}}
+      - name: m_score
+        data_tests:
+          - not_null
+          - accepted_values: {arguments: {values: [1,2,3,4,5], quote: false}}
+      - name: rm_segment
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Recent high-value','Recent low-value','Lapsed high-value','Lapsed low-value','Mid']
+
+  - name: mart_lead_features
+    description: >
+      One row per marketing-qualified lead. 8,000. Target is_won = 842 (10.53%).
+      Contains ONLY information available at lead-arrival time. The rich fields on
+      closed_deals (business_segment, declared_monthly_revenue_brl, lead_type) are
+      excluded as 100% target leakage - they exist only on rows that converted.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__marketing_qualified_leads')
+    columns:
+      - name: mql_id
+        data_tests: [unique, not_null]
+      - name: is_won_90d
+        data_tests: [not_null]
+      - name: is_won_ever
+        data_tests: [not_null]
+      - name: is_in_model_window
+        data_tests: [not_null]
+      - name: lead_origin_channel
+        data_tests: [not_null]
+      - name: page_lead_volume
+        description: "LEGACY full-dataset count (look-ahead). Kept only to reproduce the historical run."
+        data_tests: [not_null]
+      - name: page_lead_volume_prior
+        description: "Point-in-time count of leads on the same page with a strictly earlier contact date."
+        data_tests: [not_null]
+      - name: label_mature_on
+        description: "first_contact_date + 91 days: first as-of date at which is_won_90d is complete."
+        data_tests: [not_null]
+      - name: days_since_campaign_start
+        data_tests: [not_null]

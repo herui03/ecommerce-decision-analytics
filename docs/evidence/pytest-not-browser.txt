@@ -1,0 +1,120 @@
+........................................................................ [ 66%]
+....................................                                     [100%]
+=============================== warnings summary ===============================
+tests/test_leads.py::test_run_design_is_permutation_invariant_and_deterministic
+tests/test_leads.py::test_run_design_is_permutation_invariant_and_deterministic
+  /home/user/ecommerce-campaign-analytics/.venv/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:451: DeprecationWarning: scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0.
+    opt_res = optimize.minimize(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_contract_regressions.py::test_r4_03_single_line_orders_are_valid
+PASSED tests/test_contract_regressions.py::test_r4_04_swapped_category_months_are_rejected
+PASSED tests/test_contract_regressions.py::test_r4_04_swapped_state_months_are_rejected
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-1-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-13-2017-13-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-01-2017-02-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[17-01-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[NaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[nan]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[Infinity]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[-inf]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[sNaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[Infinity]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[NaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[1.5]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[-3]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[abc]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_cents_rejects_nonfinite
+PASSED tests/test_contract_regressions.py::test_r4_05_missing_required_count_is_a_contextual_error
+PASSED tests/test_contract_regressions.py::test_r4_05_nonfinite_mean_is_rejected
+PASSED tests/test_contract_regressions.py::test_r4_05_duplicate_header_is_rejected
+PASSED tests/test_contract_regressions.py::test_optional_true_nulls_remain_valid
+PASSED tests/test_contract_regressions.py::test_unpaid_item_order_reconciles_exactly_with_components
+PASSED tests/test_contract_regressions.py::test_unpaid_item_order_is_bounded_not_rejected_without_components
+PASSED tests/test_contract_regressions.py::test_payment_gmv_above_month_is_rejected
+PASSED tests/test_dashboard_artifact.py::test_committed_dashboard_equals_a_fresh_build
+PASSED tests/test_dashboard_artifact.py::test_build_is_deterministic
+PASSED tests/test_dashboard_artifact.py::test_page_is_self_contained_and_offline
+PASSED tests/test_dashboard_artifact.py::test_embedded_payload_matches_the_inspectable_json
+PASSED tests/test_dashboard_artifact.py::test_payload_records_input_hashes
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2017-01-2018-08-historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2017-01-2018-08-synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2017-01-2017-12-historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2017-01-2017-12-synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2018-03-2018-03-historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2018-03-2018-03-synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2018-01-2018-03-historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_overview_matches_reference[2018-01-2018-03-synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_codex_monthly_figures_reproduce
+PASSED tests/test_dashboard_artifact.py::test_states_match_reference_and_scope[historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_states_match_reference_and_scope[synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_categories_match_reference_search_and_empty[historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_categories_match_reference_search_and_empty[synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_payments_share_keeps_full_denominator_and_null_gmv[historical-d0]
+PASSED tests/test_dashboard_artifact.py::test_payments_share_keeps_full_denominator_and_null_gmv[synthetic-d1]
+PASSED tests/test_dashboard_artifact.py::test_invalid_range_is_an_error_not_numbers
+PASSED tests/test_dashboard_artifact.py::test_lead_topk_in_page_matches_python
+PASSED tests/test_dashboard_artifact.py::test_generated_docs_are_current
+PASSED tests/test_dbt_mutations.py::test_unmutated_project_passes
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[enriched LEFT JOIN items -> INNER JOIN (silently drops item-less orders)]
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[items_agg grain shattered by product (fan-out source)]
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[category orders counted as lines (count(*) for count(distinct))]
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[late rate no longer restricted to delivered orders]
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[lead label loses its coalesce (NULL for never-won leads)]
+PASSED tests/test_dbt_mutations.py::test_mutation_is_caught[point-in-time page count includes same-day and later leads]
+PASSED tests/test_experiment.py::test_exposed_conversions_are_uniquely_identified
+PASSED tests/test_experiment.py::test_documented_historical_results_reproduce
+PASSED tests/test_experiment.py::test_interval_coverage_is_close_to_nominal
+PASSED tests/test_experiment.py::test_synthetic_run_interval_covers_the_built_in_truth
+PASSED tests/test_leads.py::test_label_boundary_day_90_in_day_91_out_and_negative_lag
+PASSED tests/test_leads.py::test_train_end_is_as_of_minus_91_days
+PASSED tests/test_leads.py::test_historical_windows_are_refused_when_maturity_is_enforced
+PASSED tests/test_leads.py::test_score_cohort_needs_observable_outcomes
+PASSED tests/test_leads.py::test_point_in_time_feature_ignores_every_later_row
+PASSED tests/test_leads.py::test_legacy_full_dataset_feature_fails_that_invariance
+PASSED tests/test_leads.py::test_features_do_not_depend_on_labels
+PASSED tests/test_leads.py::test_training_labels_never_use_wins_observed_after_as_of
+PASSED tests/test_leads.py::test_run_design_is_permutation_invariant_and_deterministic
+PASSED tests/test_leads.py::test_ranking_breaks_ties_by_id_not_row_order
+PASSED tests/test_leads.py::test_constant_score_gets_base_rate_expectation
+PASSED tests/test_leads.py::test_historical_scores_recompute_to_committed_metrics
+PASSED tests/test_leads.py::test_audit_of_historical_split_is_date_arithmetic
+PASSED tests/test_pipeline_repro.py::test_pipeline_reproduces_committed_sample
+PASSED tests/test_r4_07_experiment.py::test_r4_07_invalid_counts_give_one_controlled_result
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts0]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts1]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts2]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts3]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts4]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_infeasible_cells_are_rejected[counts5]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_all_zero_outcomes_are_explicit_not_nan
+PASSED tests/test_r4_07_experiment.py::test_r4_07_boundary_rate_does_not_report_degenerate_interval
+PASSED tests/test_r4_07_experiment.py::test_r4_07_small_counts_carry_an_approximation_warning
+PASSED tests/test_r4_07_experiment.py::test_r4_07_generic_assumptions_carry_no_measured_numbers
+PASSED tests/test_r4_07_experiment.py::test_r4_07_synthetic_run_has_its_own_measured_balance
+PASSED tests/test_r4_07_experiment.py::test_r4_07_balance_is_undefined_without_variance
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row0]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row1]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row2]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_counts_from_csv_rejects_null_or_nonbinary[bad_row3]
+PASSED tests/test_r4_07_experiment.py::test_r4_07_audit_states_window_end_and_usable_date_precisely
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[NaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[-Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[abc]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_low_score_rate_is_contextual[sNaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[NaN]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[Infinity]
+PASSED tests/test_r4_followups.py::test_r4_05b_bad_aov_is_contextual[not-a-number]
+PASSED tests/test_r4_followups.py::test_r4_05b_float_overflow_is_rejected
+PASSED tests/test_r4_followups.py::test_r4_05b_mean_overflow_in_extract_is_contextual
+PASSED tests/test_r4_followups.py::test_tolerance_uses_decimal_exponent_for_scientific_notation
+PASSED tests/test_r4_followups.py::test_r4_06_sql_literal_escapes_single_quotes
+PASSED tests/test_r4_followups.py::test_r4_06_counts_from_csv_in_quoted_directory
+PASSED tests/test_r4_followups.py::test_r4_06_export_extracts_to_quoted_directory
+PASSED tests/test_synthetic.py::test_generation_is_byte_identical
+PASSED tests/test_synthetic.py::test_edge_cases_are_planted
+PASSED tests/test_synthetic.py::test_criteo_truth_is_reported
+108 passed, 13 deselected, 2 warnings in 93.37s (0:01:33)

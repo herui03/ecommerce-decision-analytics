@@ -1,0 +1,11 @@
+dbt-core==1.10.22
+dbt-duckdb==1.10.0
+duckdb==1.4.5
+jupyter==1.1.1
+kaggle==1.7.4.5
+matplotlib==3.9.4
+numpy==2.0.2
+pandas==2.3.3
+pyarrow==21.0.0
+scikit-learn==1.6.1
+statsmodels==0.14.6

@@ -1,0 +1,16 @@
+olist:
+  target: dev
+  outputs:
+    # Full-data warehouse built from the Kaggle CSVs in data/raw (not committed).
+    dev:
+      type: duckdb
+      path: "{{ env_var('OLIST_DUCKDB_PATH', '../data/processed/olist.duckdb') }}"
+      threads: 4
+    # Synthetic-sample warehouse. `python -m portfolio.pipeline sample` sets
+    # OLIST_RAW_DIR=../data/sample/raw and builds this target; it never touches dev.
+    sample:
+      type: duckdb
+      path: "{{ env_var('OLIST_DUCKDB_PATH', '../data/sample/olist_sample.duckdb') }}"
+      threads: 1              # dbt concurrency
+      settings:
+        threads: 1            # DuckDB engine threads: fixed float summation order

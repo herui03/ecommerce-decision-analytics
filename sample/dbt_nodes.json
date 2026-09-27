@@ -1,0 +1,686 @@
+[
+ {
+  "id": "model.olist_campaign_analytics.dim_customers",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.dim_geography",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.dim_products",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.dim_sellers",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.fct_order_items",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.fct_orders",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.int_geolocation__zip_centroid",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.int_orders__enriched",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.int_orders__items_agg",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.int_orders__payments_agg",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.int_orders__reviews_agg",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_category_performance",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_customer_segments",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_lead_features",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_monthly_performance",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_payment_performance",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.mart_state_performance",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__closed_deals",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__customers",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__geolocation",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__marketing_qualified_leads",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__order_items",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__order_payments",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__order_reviews",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__orders",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__product_categories",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__products",
+  "status": "success"
+ },
+ {
+  "id": "model.olist_campaign_analytics.stg_olist__sellers",
+  "status": "success"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_int_orders__payments_agg_primary_payment_type__credit_card__boleto__voucher__debit_card__not_defined.d22711e7c2",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_int_orders__reviews_agg_latest_review_score__False__1__2__3__4__5.8779f37e08",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_mart_customer_segments_m_score__False__1__2__3__4__5.0ffe48116e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_mart_customer_segments_r_score__False__1__2__3__4__5.25278ec206",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_mart_customer_segments_rm_segment__Recent_high_value__Recent_low_value__Lapsed_high_value__Lapsed_low_value__Mid.9702783bab",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_stg_olist__order_payments_payment_type__credit_card__boleto__voucher__debit_card__not_defined.53a5ca7435",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_stg_olist__order_reviews_review_score__False__1__2__3__4__5.ffab33a3cb",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.accepted_values_stg_olist__orders_order_status__delivered__shipped__canceled__unavailable__invoiced__processing__created__approved.ff2185dd6a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.assert_orders_enriched_reconciles",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_dim_products_ref_stg_olist__products_.90880a1ef7",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_dim_sellers_ref_stg_olist__sellers_.f6799ab01c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_fct_order_items_ref_stg_olist__order_items_.22b11d5fe0",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_fct_orders_ref_stg_olist__orders_.6e5792c03a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_int_orders__enriched_ref_stg_olist__orders_.fcd6df15d9",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_mart_customer_segments_ref_dim_customers_.a4baec1010",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.equal_rowcount_mart_lead_features_ref_stg_olist__marketing_qualified_leads_.d53cb5c15a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_additive_components",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_facts_agree_on_money",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_lead_label_contract",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_metric_layer_reconciles",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_ntile_buckets_even",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.inv_recency_anchor",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_customers_customer_unique_id.e3fe18087d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_customers_days_since_last_order.ec5c647fdd",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_customers_order_count.5036c2141d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_geography_zip_prefix.6f94dff74c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_products_product_category.069796c541",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_products_product_id.c8aba288d1",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_dim_sellers_seller_id.2e68260d7c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_fct_order_items_order_id.e887a2de02",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_fct_order_items_product_category.b619857b28",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_fct_orders_customer_unique_id.7193037620",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_fct_orders_order_id.4e687af8d0",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_geolocation__zip_centroid_zip_prefix.79f5ebeb31",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__enriched_customer_unique_id.bb69ca046a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__enriched_is_delivered_late.608bff150d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__enriched_order_id.30cc82795d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__items_agg_item_count.95d5bd6ffd",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__items_agg_items_total_brl.5e3196e43c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__items_agg_order_id.800be24d13",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__payments_agg_order_id.03a7ac140d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__payments_agg_primary_payment_type.e2c7d6f9ea",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__reviews_agg_latest_review_score.6793bf5b71",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_int_orders__reviews_agg_order_id.98d4cecbd8",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_category_performance_product_category.d4d91d3a3d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_customer_segments_customer_unique_id.03cb0fe985",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_customer_segments_m_score.cfa4e53f42",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_customer_segments_r_score.b6b166936f",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_customer_segments_rm_segment.344d053b20",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_days_since_campaign_start.7ad7ac61a6",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_is_in_model_window.3847b6374e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_is_won_90d.f2c8083208",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_is_won_ever.c230229ebc",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_label_mature_on.7590c4d400",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_lead_origin_channel.b6f2d28ef1",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_mql_id.4520dfb675",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_page_lead_volume.3f7054f8b5",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_lead_features_page_lead_volume_prior.22753b5737",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_monthly_performance_gmv_brl.7dcf9d82ba",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_monthly_performance_orders.891ad111a6",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_mart_monthly_performance_purchase_month.68a68516bb",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__closed_deals_mql_id.17a6706b7a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__closed_deals_seller_id.6e435ed932",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__customers_customer_id.fa12d6306e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__customers_customer_state.9f04d9cfc8",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__customers_customer_unique_id.8ec24e571b",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__geolocation_zip_prefix.381c1e1ca1",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__marketing_qualified_leads_first_contact_date.856c934166",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__marketing_qualified_leads_mql_id.0ae62c23c9",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__order_items_item_price_brl.c4db345176",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__order_items_order_id.6260e845c7",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__order_payments_order_id.c518f2fe94",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__order_reviews_order_id.6e8addc27a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__order_reviews_review_id.5faf914293",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__orders_customer_id.007ae2ad2c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__orders_order_id.9ec9e196cb",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__product_categories_product_category_en.914d383f1d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__product_categories_product_category_pt.0b2d738311",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__products_product_id.8b25aafa0b",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.not_null_stg_olist__sellers_seller_id.772bf05281",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_fct_order_items_order_id__order_id__ref_fct_orders_.f1e7dbc0ec",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_fct_orders_customer_unique_id__customer_unique_id__ref_dim_customers_.370175e5e2",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_stg_olist__closed_deals_mql_id__mql_id__ref_stg_olist__marketing_qualified_leads_.92547d1039",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_stg_olist__order_payments_order_id__order_id__ref_stg_olist__orders_.85d28a0d33",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.relationships_stg_olist__order_reviews_order_id__order_id__ref_stg_olist__orders_.81323eb17a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_closed_deals_dataset_mql_id.282f69c1fd",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_closed_deals_dataset_seller_id.301b83eb24",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_customers_dataset_customer_id.779c133e1b",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_customers_dataset_customer_unique_id.e31e8677dd",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_geolocation_dataset_geolocation_zip_code_prefix.13fe15e698",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_marketing_qualified_leads_dataset_mql_id.e47206f481",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_order_items_dataset_order_id.3c86915fe0",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_order_payments_dataset_order_id.13c1f8ddf5",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_order_reviews_dataset_order_id.6d98d1b3d3",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_order_reviews_dataset_review_id.c55b782f10",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_orders_dataset_customer_id.3fce447879",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_orders_dataset_order_id.0e0a607639",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_products_dataset_product_id.8147990695",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_olist_sellers_dataset_seller_id.5feb043131",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_not_null_olist_raw_product_category_name_translation_product_category_name.264cad54ab",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_relationships_olist_raw_olist_closed_deals_dataset_mql_id__mql_id__source_olist_raw_olist_marketing_qualified_leads_dataset_.1a8f190f2d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_relationships_olist_raw_olist_order_items_dataset_order_id__order_id__source_olist_raw_olist_orders_dataset_.4d6d34f661",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_relationships_olist_raw_olist_order_payments_dataset_order_id__order_id__source_olist_raw_olist_orders_dataset_.5578f109df",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_relationships_olist_raw_olist_order_reviews_dataset_order_id__order_id__source_olist_raw_olist_orders_dataset_.da7b717d0b",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_closed_deals_dataset_mql_id.d9617ec16d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_closed_deals_dataset_seller_id.1bf2355693",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_customers_dataset_customer_id.852728f84d",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_marketing_qualified_leads_dataset_mql_id.711ea09e64",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_orders_dataset_customer_id.fb367fa5fe",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_orders_dataset_order_id.ccf0c8c1b6",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_products_dataset_product_id.ceef323327",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_olist_sellers_dataset_seller_id.4b1a456386",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.source_unique_olist_raw_product_category_name_translation_product_category_name.9e502e55e9",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_fct_order_items_order_id__order_item_seq.160e1bb586",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_mart_category_performance_purchase_month__product_category.ae45b67e3c",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_mart_payment_performance_purchase_month__primary_payment_type.d9b1083f35",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_mart_state_performance_purchase_month__customer_state.e789d10cfc",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_stg_olist__order_items_order_id__order_item_seq.39db7dc382",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_stg_olist__order_payments_order_id__payment_seq.d9a3a295d9",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_combination_of_columns_stg_olist__order_reviews_review_id__order_id.4f31305a20",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_dim_customers_customer_unique_id.6fdb869708",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_dim_geography_zip_prefix.9612028c4f",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_dim_products_product_id.ef7b2a9985",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_dim_sellers_seller_id.b55e677f09",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_fct_orders_order_id.523ddb6ce5",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_int_geolocation__zip_centroid_zip_prefix.0eccdd2480",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_int_orders__enriched_order_id.0e18809059",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_int_orders__items_agg_order_id.8845e332fa",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_int_orders__payments_agg_order_id.06f9d96b3f",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_int_orders__reviews_agg_order_id.c854e08655",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_mart_customer_segments_customer_unique_id.55d00af94e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_mart_lead_features_mql_id.7f8b1cd8ca",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_mart_monthly_performance_purchase_month.c451cf272e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__closed_deals_mql_id.f0cdc88ba1",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__closed_deals_seller_id.186dea49db",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__customers_customer_id.322bd7d968",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__marketing_qualified_leads_mql_id.0e9c87425f",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__orders_customer_id.7816683801",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__orders_order_id.426f0a2be7",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__product_categories_product_category_pt.7b3657101e",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__products_product_id.74d899d20a",
+  "status": "pass"
+ },
+ {
+  "id": "test.olist_campaign_analytics.unique_stg_olist__sellers_seller_id.4ea5b863cf",
+  "status": "pass"
+ }
+]

@@ -1,0 +1,118 @@
+{
+  "assumptions": [
+    {
+      "kind": "design",
+      "name": "Randomised assignment",
+      "status": "a design property; covariate balance across the assigned arms is the check (see diagnostics)",
+      "used_by": "ITT, CACE"
+    },
+    {
+      "kind": "assumed",
+      "name": "SUTVA / no interference between users",
+      "status": "assumed; not testable with anonymous impressions",
+      "used_by": "ITT, CACE"
+    },
+    {
+      "kind": "checked",
+      "name": "One-sided non-compliance (no exposure in control)",
+      "status": "counts_from_csv rejects any exposed control unit; for the historical run, control exposure was documented as 0",
+      "used_by": "CACE"
+    },
+    {
+      "kind": "assumed",
+      "name": "Exclusion restriction (assignment affects conversion only through exposure)",
+      "status": "assumed and untestable; violated if assignment changes anything besides ad exposure",
+      "used_by": "CACE"
+    },
+    {
+      "kind": "design",
+      "name": "CACE describes compliers only",
+      "status": "compliers can differ sharply from other users (see the exposure balance diagnostic), so CACE does not transfer to the whole population",
+      "used_by": "CACE"
+    }
+  ],
+  "cace": {
+    "cace": 0.02801039347926457,
+    "ci": [
+      0.013483060345503317,
+      0.04253772661302582
+    ],
+    "ci_status": "ok",
+    "compliance": 0.061593100944793824,
+    "complier_relative_lift": 1.1829691446140336,
+    "decomposition_cace": 0.02801039347926458,
+    "exposed_rate": 0.051688435807582034,
+    "implied_complier_control_rate": 0.023678042328317453,
+    "never_taker_rate": 0.005049713013204529,
+    "se": 0.007412040858072397,
+    "status": "ok",
+    "wald_vs_decomposition_gap": 1.0408340855860843e-17,
+    "warnings": []
+  },
+  "cohen_h_mde80": 0.0013178334978665683,
+  "cohen_h_mde95": 0.0017189029298535462,
+  "counts": {
+    "n_c": 36146,
+    "n_exposed": 12556,
+    "n_t": 203854,
+    "y_c": 224,
+    "y_exposed": 649,
+    "y_t": 1615
+  },
+  "diagnostics": {
+    "covariate": "f0",
+    "provenance": "measured on the synthetic file in this build",
+    "smd_exposure_within_treated": 1.229138090892732,
+    "smd_treatment": 0.008665005399563929
+  },
+  "itt": {
+    "alpha": 0.05,
+    "ci": [
+      0.0008293515202234676,
+      0.0026211424659200074
+    ],
+    "ci_status": "ok",
+    "diff": 0.0017252469930717374,
+    "log10_p_value": -3.27833445628106,
+    "p_c": 0.006197089581143142,
+    "p_t": 0.007922336574214879,
+    "p_value_two_sided": 0.0005268239906039973,
+    "relative_ci": [
+      0.11216911902111537,
+      0.46946821968791297
+    ],
+    "relative_lift": 0.27839632951594195,
+    "se": 0.0004570979262450633,
+    "status": "ok",
+    "warnings": [],
+    "z": 3.466733472101659
+  },
+  "label": "SYNTHETIC",
+  "mde80": {
+    "alpha": 0.05,
+    "mde_abs": 0.0012547688723902515,
+    "mde_rel": 0.20247712348847335,
+    "power": 0.8
+  },
+  "mde95": {
+    "alpha": 0.05,
+    "mde_abs": 0.001614519130205288,
+    "mde_rel": 0.2605286092875015,
+    "power": 0.95
+  },
+  "naive": {
+    "control_rate": 0.006197089581143142,
+    "diff": 0.04549134622643889,
+    "exposed_rate": 0.051688435807582034,
+    "label": "NOT an effect estimate: exposure is selected by user behaviour",
+    "relative": 7.340759824557411
+  },
+  "status": "ok",
+  "truth": {
+    "complier_share": 0.06192916666666667,
+    "rows": 240000,
+    "treatment_share_target": 0.85,
+    "true_cace_pp": 4.0,
+    "true_itt_pp": 0.24771666666666667
+  }
+}

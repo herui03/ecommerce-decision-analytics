@@ -1,0 +1,63 @@
+version: 2
+
+# RECONSTRUCTED 2026-09. The original intermediate layer (and this file, referenced by
+# docs/challenge-03-silent-fanout.md) was never committed. Tests below restate the
+# documented contract: each child aggregate is unique per order, and the enriched
+# model has exactly one row per source order.
+models:
+  - name: int_orders__items_agg
+    description: "One row per order with >=1 item. Full data (historical): 98,666."
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: item_count
+        data_tests: [not_null]
+      - name: items_total_brl
+        data_tests: [not_null]
+
+  - name: int_orders__payments_agg
+    description: "One row per order with >=1 payment row. Full data (historical): 99,440."
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: primary_payment_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [credit_card, boleto, voucher, debit_card, not_defined]
+
+  - name: int_orders__reviews_agg
+    description: "One row per reviewed order. Full data (historical): 98,673."
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: latest_review_score
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+
+  - name: int_geolocation__zip_centroid
+    description: "One row per zip prefix, median centroid. Full data (historical): 19,015."
+    columns:
+      - name: zip_prefix
+        data_tests: [unique, not_null]
+
+  - name: int_orders__enriched
+    description: >
+      Order grain, equal to stg_olist__orders row for row. Spine + LEFT JOINs onto
+      pre-aggregated children; NULLs preserved; has_no_* flags carried.
+    data_tests:
+      - equal_rowcount:
+          arguments:
+            compare_model: ref('stg_olist__orders')
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_unique_id
+        data_tests: [not_null]
+      - name: is_delivered_late
+        data_tests: [not_null]

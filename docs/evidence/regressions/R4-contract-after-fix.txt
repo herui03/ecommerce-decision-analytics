@@ -1,0 +1,32 @@
+# Same regression file run against the FIXED contract.py (sha256 a0f4e69135635b54871f33ec7e33e8c3f69d6b94371f2691c0ba76742b01cb3c)
+# command: python -m pytest tests/test_contract_regressions.py -p no:cacheprovider -q -rA
+
+.........................                                                [100%]
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_contract_regressions.py::test_r4_03_single_line_orders_are_valid
+PASSED tests/test_contract_regressions.py::test_r4_04_swapped_category_months_are_rejected
+PASSED tests/test_contract_regressions.py::test_r4_04_swapped_state_months_are_rejected
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-1-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-13-2017-13-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[2017-01-2017-02-01]
+PASSED tests/test_contract_regressions.py::test_r4_04_non_canonical_or_inconsistent_month_is_rejected[17-01-2017-01-01]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[NaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[nan]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[Infinity]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[-inf]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_float_rejects_nonfinite[sNaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[Infinity]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[NaN]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[1.5]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[-3]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_int_rejects_bad_counts_with_extract_error[abc]
+PASSED tests/test_contract_regressions.py::test_r4_05_to_cents_rejects_nonfinite
+PASSED tests/test_contract_regressions.py::test_r4_05_missing_required_count_is_a_contextual_error
+PASSED tests/test_contract_regressions.py::test_r4_05_nonfinite_mean_is_rejected
+PASSED tests/test_contract_regressions.py::test_r4_05_duplicate_header_is_rejected
+PASSED tests/test_contract_regressions.py::test_optional_true_nulls_remain_valid
+PASSED tests/test_contract_regressions.py::test_unpaid_item_order_reconciles_exactly_with_components
+PASSED tests/test_contract_regressions.py::test_unpaid_item_order_is_bounded_not_rejected_without_components
+PASSED tests/test_contract_regressions.py::test_payment_gmv_above_month_is_rejected
+25 passed in 0.38s
